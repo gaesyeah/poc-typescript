@@ -10,7 +10,8 @@ const read = () => {
   return db.query<Name>(`SELECT * FROM pages;`);
 };
 
-const update = (id: string, name: string) => {
+const update = (object: Name) => {
+  const { id, name } = object; 
   return db.query<RowCount>(`UPDATE pages SET name = $2 WHERE id = $1;`, [id, name]);
 };
 

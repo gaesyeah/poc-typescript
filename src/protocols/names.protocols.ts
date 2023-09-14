@@ -1,4 +1,4 @@
-export type Name = { id: number, name: string };
+export type Name = { id: number | string, name: string };
 
 export type CreateName = Omit<Name, 'id'>;
 

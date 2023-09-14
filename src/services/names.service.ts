@@ -1,4 +1,4 @@
-import { CreateName } from "../protocols/names.protocols";
+import { CreateName, Name } from "../protocols/names.protocols";
 import namesRepository from "../repositories/names.repository";
 
 const create = (body: CreateName) => {
@@ -9,9 +9,9 @@ const read = () => {
   return namesRepository.read();
 };
 
-const update = async (id: string, name: string) => {
-  const { rowCount } = await namesRepository.update(id, name);
-  if (rowCount === 0) throw { message: `a name with the id ${id} does not exist`};
+const update = async (object : Name) => {
+  const { rowCount } = await namesRepository.update(object);
+  if (rowCount === 0) throw { message: `a name with the id ${object.id} does not exist`};
   return;
 };
 

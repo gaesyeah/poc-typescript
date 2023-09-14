@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { CREATED, INTERNAL_SERVER_ERROR, NO_CONTENT } from "http-status";
-import { CreateName } from "../protocols/names.protocols";
+import { CreateName, Name } from "../protocols/names.protocols";
 import namesService from "../services/names.service";
 
 const create = async (req: Request, res: Response) => {
@@ -23,10 +23,9 @@ const read = async (req: Request, res: Response) => {
 };
 
 const update = async (req: Request, res: Response) => {
-  const id = req.params.id as string;
-  const body = req.body as CreateName;
+  const object : Name = { id: req.params.id, name: req.body }
   try {
-    await namesService.update(id, body.name);
+    await namesService.update(object);
     res.sendStatus(NO_CONTENT);
   } catch ({ message }){
     res.status(INTERNAL_SERVER_ERROR).send(message);
